@@ -1,0 +1,6 @@
+[Käyttäjä | tunnus | salasana]++-*[Askare | nimi]
+[Käyttäjä | tunnus | salasana]++-*[Tärkeysaste | nimi | aste]
+[Käyttäjä | tunnus | salasana]++-*[Luokka | nimi]
+[Askare | nimi | lisäyspäivä | tila | kuvaus]*-1[Tärkeysaste | nimi | aste]
+[Askare | nimi]*-*[Luokka | nimi]
+
