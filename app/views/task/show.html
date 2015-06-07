@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{task.nimi}}</h1>
+  <ul>
+    <li><strong>Lisäyspäivä:</strong> {{task.lisayspaiva}}</li>
+    <li><strong>Tärkeys:</strong> Ei tärkeä</li>
+    <li>
+      <strong>Tila:</strong> 
+      {% if task.tehty %}
+        <label class="label label-succes">tehty
+      {% else %}
+        <label class="label label-danger">tekemättä
+      {% endif %}</li>
+    <li><strong>Luokka:</strong> Kotityöt</li>
+  </ul>
+  <p>
+    {{task.kuvaus}}
+  </p>
+    <p>
+      <button class="btn btn-danger">Poista</button> <a href="" class="btn btn-default">Muokkaa</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Käyttäjän Juri Muistilista</h1>
+
+  <p>
+    <a href="{{base_path}}/task/new" class="btn btn-success">Lisää askare</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Lisäyspäivä</th>
+        <th>Tärkeys</th>
+        <th>Tila</th>
+        <th>luokka</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for task in tasks %}
+        <tr>
+          <td><a href="{{base_path}}/task/{{task.id}}">{{task.nimi}}</a></td>
+          <td>{{task.lisayspaiva}}</td>
+          <td>Ei tarkea</td>
+          <td>
+            {% if task.tehty %}
+              <label class="label label-succes">tehty
+            {% else %}
+              <label class="label label-danger">tekemättä
+            {% endif %}
+          </td>
+          <td>Kotityöt</td>
+          <td><a class="btn btn-default btn-sm" href="#">Muokkaa</a></td>
+        </tr> 
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

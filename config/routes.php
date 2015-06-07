@@ -9,11 +9,19 @@
   });
 
   $routes->get('/task', function() {
-    HelloWorldController::listing_page();
+    TaskController::index();
   });
 
-  $routes->get('/task/1', function() {
-    HelloWorldController::note_information();
+  $routes->post('/task', function() {
+    TaskController::store();
+  });
+
+  $routes->get('/task/new', function() {
+    TaskController::create();
+  });
+
+  $routes->get('/task/:id', function($id) {
+    TaskController::show($id);
   });
 
   $routes->get('/task/1/edit', function() {

@@ -8,8 +8,17 @@
     }
 
     public static function sandbox(){
-      // Testaa koodiasi täällä
-      View::make('helloworld.html');
+      $siivous = task::find(1);
+      $tasks = task::all();
+
+      Kint::dump($siivous);
+      Kint::dump($tasks);
+
+      $juri = user::find(1);
+      $users = user::all();
+
+      Kint::dump($juri);
+      Kint::dump($users);
     }
 
     public static function listing_page(){

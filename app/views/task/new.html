@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Lisää uusi askare</h1>
+    <form method="post" action="{{base_path}}/task">
+        <div class="form-group">
+            <label>Nimi</label>
+            <input type="text" name="nimi" class="form-control">           
+        </div>
+
+        <div class="form-group">
+            <label></label>
+            <textarea name="kuvaus" class="form-control"></textarea>       
+        </div>
+
+        <div class="form-group">
+            <label></label>
+            <button type="submit" class="btn btn-primary">Lisää</button>           
+        </div>
+    </form>
+{% endblock %}
