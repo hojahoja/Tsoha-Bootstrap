@@ -24,8 +24,16 @@
     TaskController::show($id);
   });
 
-  $routes->get('/task/1/edit', function() {
-    HelloWorldController::edit_note();
+  $routes->get('/task/:id/edit', function($id) {
+    TaskController::edit($id);
+  });
+
+  $routes->post('/task/:id/edit', function($id) {
+    TaskController::update($id);
+  });
+
+  $routes->post('/task/:id/destroy', function($id) {
+    TaskController::destroy($id);
   });
 
   $routes->get('/login', function() {

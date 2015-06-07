@@ -68,6 +68,16 @@ class task extends BaseModel {
         ));
     }
 
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Askare SET nimi = :nimi, kuvaus = :kuvaus WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'nimi' => $this->nimi, 'kuvaus'=> $this->kuvaus));
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Askare WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+
     public function validate_nimi() {
         $errors[] = $this->validate_string_length($this->nimi, 'nimi', 2, 30);
 
