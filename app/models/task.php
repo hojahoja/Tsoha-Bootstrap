@@ -11,6 +11,7 @@ class task extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_nimi', 'validate_kuvaus');
     }
 
     public static function all() {
@@ -65,5 +66,17 @@ class task extends BaseModel {
             'lisayspaiva' => $this->lisayspaiva,
             'kuvaus' => $this->kuvaus
         ));
+    }
+
+    public function validate_nimi() {
+        $errors[] = $this->validate_string_length($this->nimi, 'nimi', 2, 30);
+
+        return $errors;
+    }
+
+    public function validate_kuvaus() {
+        $errors[] = $this->validate_string_length($this->kuvaus, 'kuvaus', 3, 250);
+
+        return $errors;
     }
 }

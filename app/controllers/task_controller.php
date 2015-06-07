@@ -18,15 +18,27 @@ class TaskController extends BaseController {
 
     public static function store() {
         $params = $_POST;
-
-        $task = new task(array(
+        $attributes = array(
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
             'lisayspaiva' => date("Y-m-d H:i:s")
-        ));
+        );
 
-        $task->save();
+        $task = new task($attributes);
+        $errors = $task->errors();
+        $errorcount = 0;
+        foreach ($errors as $errort) {
+            if (count($errort) > 0) {
+                $errorcount++;
+            }
+        }
 
-        Redirect::to('/task/' . $task->id, array('message' => 'Askare lisätty'));
+        if ($errorcount == 0) {
+            $task->save();
+            Redirect::to('/task', array('message' => 'Askare lisätty'));
+        } else {
+            View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
+
     }
 }

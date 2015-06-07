@@ -20,7 +20,25 @@
       $errors = array();
 
       foreach($this->validators as $validator){
-        // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+        $validation = $this->{$validator}();
+        $errors = array_merge($errors, $validation);
+      }
+
+      return $errors;
+    }
+
+    public function validate_string_length($string, $attrName, $min, $max) {
+    $errors = array();
+      if ($string == '' || $string == null) {
+        $errors[] = $attrName . ' ei saa olla tyhjä';
+      }
+
+      if (strlen($string) < $min) {
+        $errors[] = $attrName . ' pitää olla vähintään ' . $min . ' merkkiä pitkä';
+      }
+
+      if (strlen($string) > $max) {
+        $errors[] = $attrName . ' saa olla enintään ' . $max . ' merkkiä pitkä';
       }
 
       return $errors;

@@ -8,17 +8,14 @@
     }
 
     public static function sandbox(){
-      $siivous = task::find(1);
-      $tasks = task::all();
+      $taski = new task(array(
+        'nimi' => '',
+        'kuvaus' => 'a',
+      ));
 
-      Kint::dump($siivous);
-      Kint::dump($tasks);
+      $errors = $taski->errors();
 
-      $juri = user::find(1);
-      $users = user::all();
-
-      Kint::dump($juri);
-      Kint::dump($users);
+      Kint::dump($errors);
     }
 
     public static function listing_page(){

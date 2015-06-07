@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Lisää uusi askare</h1>
+
+    {% if errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for array in errors %}
+                    {% for error in array %}
+                        <li>{{error}}</li>
+                    {% endfor %}                    
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
     <form method="post" action="{{base_path}}/task">
         <div class="form-group">
             <label>Nimi</label>
