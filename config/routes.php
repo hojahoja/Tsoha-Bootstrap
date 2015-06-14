@@ -40,6 +40,14 @@
     TaskController::destroy($id);
   });
 
+  $routes->get('/class', 'check_logged_in', function() {
+    TaskClassController::index();
+  });
+
+  $routes->post('/class', 'check_logged_in', function() {
+    TaskClassController::store();
+  });
+
   $routes->get('/login', function() {
     UserController::login();
   });

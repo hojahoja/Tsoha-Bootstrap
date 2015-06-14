@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Sovellus users-palvelimella](http://hojahoja.users.cs.helsinki.fi/muistilista/) (tunnus: Juri salasana: Salasana)
+* [Sovellus users-palvelimella](http://hojahoja.users.cs.helsinki.fi/muistilista/) (tunnus: Juri, salasana: Salasana)
   * [Listaussivu](http://hojahoja.users.cs.helsinki.fi/muistilista/task)
   * [Esittelysivu](http://hojahoja.users.cs.helsinki.fi/muistilista/task/1)
   * [Muokkausivu](http://hojahoja.users.cs.helsinki.fi/muistilista/task/1/edit)

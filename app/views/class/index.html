@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Käyttäjän {{user_logged_in.nimi}} Luokat</h1>
+
+  {% if errors %}
+  <div class="alert alert-danger">
+    <ul>
+      {% for array in errors %}
+        {% for error in array %}
+          <li>{{error}}</li>
+        {% endfor %}                    
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <form method="post" action="{{base_path}}/class">
+    <div class="form-group">
+      <label>Nimi</label>
+      <input type="text" name="nimi" class="form-control">           
+    </div>
+
+    <div class="form-group">
+      <label></label>
+      <button type="submit" class="btn btn-success">Lisää Luokka</button>           
+    </div>
+  </form>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for class in classes %}
+        <tr>
+          <td>{{class.nimi}}</td>
+          <td><a href="#" class="btn btn-default">Muokkaa</a></td>
+          <td><a href="#" class="btn btn-danger">Poista</a></td>
+        </tr> 
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
