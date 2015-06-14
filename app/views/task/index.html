@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Käyttäjän Juri Muistilista</h1>
+  <h1>Käyttäjän {{user_logged_in.nimi}} Muistilista</h1>
 
   <p>
     <a href="{{base_path}}/task/new" class="btn btn-success">Lisää askare</a>
