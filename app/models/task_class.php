@@ -38,6 +38,11 @@ class TaskClass extends BaseModel {
         $query->execute(array('nimi' => $this->nimi));
     }
 
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Luokka WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+
     public function validate_nimi() {
         $errors[] = $this->validate_string_length($this->nimi, 'nimi', 2, 30);
 

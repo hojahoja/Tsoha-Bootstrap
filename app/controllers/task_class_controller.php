@@ -31,4 +31,12 @@ class TaskClassController extends BaseController {
         }
 
     }
+
+    public static function destroy($id) {
+        $class = new TaskClass(array('id' => $id));
+
+        $class->destroy();
+
+        Redirect::to('/class', array('message' => 'Luokka poistettu'));
+    }
 }

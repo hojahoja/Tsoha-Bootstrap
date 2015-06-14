@@ -41,7 +41,11 @@
         <tr>
           <td>{{class.nimi}}</td>
           <td><a href="#" class="btn btn-default">Muokkaa</a></td>
-          <td><a href="#" class="btn btn-danger">Poista</a></td>
+          <td>
+            <form method="post" action="{{base_path}}/class/{{class.id}}/destroy" style="display: inline-block;">
+              <button type="submit" class="btn btn-danger">Poista</button>
+            </form>
+          </td>
         </tr> 
       {% endfor %}
     </tbody>

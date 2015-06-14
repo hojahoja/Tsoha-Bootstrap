@@ -48,6 +48,10 @@
     TaskClassController::store();
   });
 
+  $routes->post('/class/:id/destroy', 'check_logged_in', function($id) {
+    TaskClassController::destroy($id);
+  });
+
   $routes->get('/login', function() {
     UserController::login();
   });
