@@ -12,6 +12,8 @@
     HelloWorldController::sandbox();
   });
 
+//////////////////////////////Task//////////////////////////////
+
   $routes->get('/task', 'check_logged_in', function() {
     TaskController::index();
   });
@@ -40,6 +42,8 @@
     TaskController::destroy($id);
   });
 
+//////////////////////////////TaskClass//////////////////////////////
+
   $routes->get('/class', 'check_logged_in', function() {
     TaskClassController::index();
   });
@@ -52,6 +56,16 @@
     TaskClassController::destroy($id);
   });
 
+    $routes->get('/class/:id/edit', 'check_logged_in', function($id) {
+    TaskClassController::edit($id);
+  });
+
+  $routes->post('/class/:id/edit', 'check_logged_in', function($id) {
+    TaskClassController::update($id);
+  });
+
+//////////////////////////////Priority//////////////////////////////
+
   $routes->get('/priority', 'check_logged_in', function() {
     PriorityController::index();
   });
@@ -63,6 +77,16 @@
   $routes->get('/priority/new', 'check_logged_in', function() {
     PriorityController::create();
   });
+
+  $routes->post('/priority/:id/destroy', 'check_logged_in', function($id) {
+    PriorityController::destroy($id);
+  });
+
+  $routes->post('/priority/:id/edit', 'check_logged_in', function($id) {
+    PriorityController::update($id);
+  });
+
+//////////////////////////////User//////////////////////////////
 
   $routes->get('/login', function() {
     UserController::login();

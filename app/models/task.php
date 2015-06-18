@@ -79,7 +79,7 @@ class task extends BaseModel {
     }
 
     public function validate_nimi() {
-        $errors[] = $this->validate_string_length($this->nimi, 'nimi', 2, 30);
+        $errors[] = $this->validate_string_length($this->nimi, 'nimi', 2, 50);
 
         return $errors;
     }

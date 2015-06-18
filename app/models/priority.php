@@ -43,9 +43,19 @@ class Priority extends BaseModel {
             ));
     }
 
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Tarkeysaste WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Tarkeysaste SET nimi = :nimi WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'nimi' => $this->nimi));
+    }
+
 
     public function validate_nimi() {
-        $errors[] = $this->validate_string_length($this->nimi, 'nimi', 2, 30);
+        $errors[] = $this->validate_string_length($this->nimi, 'nimi', 2, 50);
 
         return $errors;
     }

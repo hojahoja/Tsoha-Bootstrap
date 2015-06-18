@@ -19,7 +19,7 @@ class TaskClass extends BaseModel {
 
         foreach ($rows as $row) {
 
-            $classes[] = new task(array(
+            $classes[] = new TaskClass(array(
                 'id' => $row['id'],
                 'nimi' => $row['nimi'],
                 'kayttaja_id' => $row['kayttaja_id']
@@ -28,6 +28,27 @@ class TaskClass extends BaseModel {
         }
 
         return $classes;
+    }
+
+    public static function find($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE id = :id LIMIT 1');
+        $query->execute(array('id' => $id));
+        $row = $query->fetch();
+
+        if ($row) {    
+            $class = new TaskClass(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi']
+                ));
+        }
+
+        return $class;
+    }
+
+
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Luokka SET nimi = :nimi WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'nimi' => $this->nimi));
     }
 
     public function save() {
@@ -44,7 +65,7 @@ class TaskClass extends BaseModel {
     }
 
     public function validate_nimi() {
-        $errors[] = $this->validate_string_length($this->nimi, 'nimi', 2, 30);
+        $errors[] = $this->validate_string_length($this->nimi, 'nimi', 2, 50);
 
         return $errors;
     }

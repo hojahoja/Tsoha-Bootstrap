@@ -39,7 +39,7 @@
       {% for class in classes %}
         <tr>
           <td>{{class.nimi}}</td>
-          <td><a href="#" class="btn btn-default">Muokkaa</a></td>
+          <td><a href="{{base_path}}/class/{{class.id}}/edit" class="btn btn-default">Muokkaa</a></td>
           <td>
             <form method="post" action="{{base_path}}/class/{{class.id}}/destroy" style="display: inline-block;">
               <button type="submit" class="btn btn-danger">Poista</button>

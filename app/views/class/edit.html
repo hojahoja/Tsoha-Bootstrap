@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Muokkaa luokkaa {{attributes.nimi}}</h1>
+    {% if errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for array in errors %}
+                    {% for error in array %}
+                        <li>{{error}}</li>
+                    {% endfor %}                    
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form method="post" action="{{base_path}}/class/{{attributes.id}}/edit">
+      <div>
+        <label>Nimi</label>
+        <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
+      </div>
+      <div class="form-group">
+      <button type="submit" class="btn btn-success">Tallenna</button>
+      </div>
+    </form>
+{% endblock %}
