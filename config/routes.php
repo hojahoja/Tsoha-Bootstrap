@@ -52,6 +52,14 @@
     TaskClassController::destroy($id);
   });
 
+  $routes->get('/priority', 'check_logged_in', function() {
+    PriorityController::index();
+  });
+
+  $routes->get('/priority/new', 'check_logged_in', function() {
+    PriorityController::create();
+  });
+
   $routes->get('/login', function() {
     UserController::login();
   });

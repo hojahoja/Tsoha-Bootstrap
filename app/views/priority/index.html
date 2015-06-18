@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Käyttäjän {{user_logged_in.nimi}} tärkeyasteet</h1>
+
+  {% if errors %}
+  <div class="alert alert-danger">
+    <ul>
+      {% for array in errors %}
+        {% for error in array %}
+          <li>{{error}}</li>
+        {% endfor %}                    
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <p>
+    <a href="{{base_path}}/priority/new" class="btn btn-success">Lisää Tärkeysaste</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Arvo</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for priority in priorities %}
+        <tr>
+          <td><a href="{{base_path}}/priority/{{priority.id}}">{{priority.nimi}}</a></td>
+          <td>{{priority.aste}}</td>
+          <td><a href="{{base_path}}/priority/{{priority.id}}/edit" class="btn btn-default">Muokkaa</a></td>
+        </tr> 
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
