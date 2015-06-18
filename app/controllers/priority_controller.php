@@ -7,14 +7,19 @@ class PriorityController extends BaseController {
         View::make('priority/index.html', array('priorities' => $priorities));
     }
 
-/*    public static function store() {
+    public static function create() {
+        View::make('priority/new.html');
+    }
+
+   public static function store() {
         $params = $_POST;
         $attributes = array(
-            'nimi' => $params['nimi']
+            'nimi' => $params['nimi'],
+            'aste' => $params['aste']
         );
 
-        $class = new TaskClass($attributes);
-        $errors = $class->errors();
+        $priority = new Priority($attributes);
+        $errors = $priority->errors();
         $errorcount = 0;
         foreach ($errors as $errort) {
             if (count($errort) > 0) {
@@ -23,20 +28,20 @@ class PriorityController extends BaseController {
         }
 
         if ($errorcount == 0) {
-            $class->save();
-            Redirect::to('/class', array('message' => 'Luokka lisätty'));
+            $priority->save();
+            Redirect::to('/priority', array('message' => 'Tärkeysaste lisätty'));
         } else {
-            $priorities=TaskClass::all();
-            View::make('class/index.html', array('errors' => $errors, 'attributes' => $attributes, 'priorities' => $priorities));
+            $priorities=Priority::all();
+            View::make('priority/index.html', array('errors' => $errors, 'attributes' => $attributes, 'priorities' => $priorities));
         }
 
     }
-
+    /*
     public static function destroy($id) {
-        $class = new TaskClass(array('id' => $id));
+        $priority = new Priority(array('id' => $id));
 
-        $class->destroy();
+        $priority->destroy();
 
-        Redirect::to('/class', array('message' => 'Luokka poistettu'));
+        Redirect::to('/priority', array('message' => 'Luokka poistettu'));
     }*/
 }

@@ -25,6 +25,7 @@
         <th>Nimi</th>
         <th>Arvo</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -34,8 +35,13 @@
           <td><a href="{{base_path}}/priority/{{priority.id}}">{{priority.nimi}}</a></td>
           <td>{{priority.aste}}</td>
           <td><a href="{{base_path}}/priority/{{priority.id}}/edit" class="btn btn-default">Muokkaa</a></td>
+          <td>
+            <form method="post" action="{{base_path}}/priority/{{priority.id}}/destroy" style="display: inline-block;">
+              <button type="submit" class="btn btn-danger">Poista</button>
+            </form>
+          </td>
         </tr> 
-      {% endfor %}
+        {% endfor %}
     </tbody>
   </table>
 {% endblock %}

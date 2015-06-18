@@ -56,6 +56,10 @@
     PriorityController::index();
   });
 
+  $routes->post('/priority', 'check_logged_in', function() {
+    PriorityController::store();
+  });
+
   $routes->get('/priority/new', 'check_logged_in', function() {
     PriorityController::create();
   });

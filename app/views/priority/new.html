@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Lisää uusi Tärkeysaste</h1>
+
+    {% if errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for array in errors %}
+                    {% for error in array %}
+                        <li>{{error}}</li>
+                    {% endfor %}                    
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form method="post" action="{{base_path}}/priority">
+        <div class="form-group">
+            <label>Nimi</label>
+            <input type="text" name="nimi" class="form-control">           
+        </div>
+
+        <div class="form-group">
+            <label>arvo</label>
+            <input type="number" name="aste" class="form-control" min="1" max="100">       
+        </div>
+
+        <div class="form-group">
+            <label></label>
+            <button type="submit" class="btn btn-success">Lisää</button>           
+        </div>
+    </form>
+{% endblock %}
