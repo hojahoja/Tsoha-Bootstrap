@@ -3,7 +3,7 @@
 class TaskClassController extends BaseController {
 
     public static function index() {
-        $classes=TaskClass::all();
+        $classes=TaskClass::find_by_user_id(BaseController::get_user_logged_in()->id);
         View::make('class/index.html', array('classes' => $classes));
     }
 

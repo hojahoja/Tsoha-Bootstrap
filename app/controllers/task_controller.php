@@ -3,7 +3,7 @@
 class TaskController extends BaseController {
 
     public static function index() {
-        $tasks = task::all();
+        $tasks = task::find_by_user_id(BaseController::get_user_logged_in()->id);
         View::make('task/index.html', array('tasks' => $tasks));
     }
 
@@ -49,7 +49,6 @@ class TaskController extends BaseController {
 
     public static function update($id) {
         $params = $_POST;
-        Kint::dump($params);
 
         $attributes = array(
             'id' => $id,

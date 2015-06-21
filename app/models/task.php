@@ -37,6 +37,29 @@ class task extends BaseModel {
         return $tasks;
     }
 
+    public static function find_by_user_id($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Askare WHERE kayttaja_id = :id');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+
+        $tasks = array();
+
+        foreach ($rows as $row) {
+
+            $tasks[] = new task(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'lisayspaiva' => $row['lisayspaiva'],
+                'tehty' => $row['tehty'],
+                'kuvaus' => $row['kuvaus'],
+                'kayttaja_id' => $row['kayttaja_id']
+            ));
+
+        }
+
+        return $tasks;
+    }
+
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Askare WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -58,13 +81,14 @@ class task extends BaseModel {
 
     public function save() {
         $query = DB::connection()->prepare(
-            'INSERT INTO Askare (nimi, lisayspaiva, kuvaus) 
-            VALUES (:nimi, :lisayspaiva, :kuvaus) RETURNING id');
+            'INSERT INTO Askare (nimi, lisayspaiva, kuvaus, kayttaja_id) 
+            VALUES (:nimi, :lisayspaiva, :kuvaus, :kayttaja_id) RETURNING id');
         
         $query->execute(array(
             'nimi' => $this->nimi,
             'lisayspaiva' => $this->lisayspaiva,
-            'kuvaus' => $this->kuvaus
+            'kuvaus' => $this->kuvaus,
+            'kayttaja_id' => BaseController::get_user_logged_in()->id
         ));
     }
 

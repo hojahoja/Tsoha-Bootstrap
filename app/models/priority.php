@@ -33,6 +33,28 @@ class Priority extends BaseModel {
         return $priorities;
     }
 
+    public static function find_by_user_id($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Tarkeysaste WHERE kayttaja_id = :id');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+
+        $priorities = array();
+
+        foreach ($rows as $row) {
+
+            $priorities[] = new Priority(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'aste' => $row['aste'],
+                'kayttaja_id' => $row['kayttaja_id']
+            ));
+
+        }
+
+        return $priorities;
+    }
+
+
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Tarkeysaste WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -42,7 +64,7 @@ class Priority extends BaseModel {
             $class = new TaskClass(array(
                 'id' => $row['id'],
                 'nimi' => $row['nimi']
-                ));
+            ));
         }
 
         return $class;
@@ -50,13 +72,14 @@ class Priority extends BaseModel {
 
     public function save() {
         $query = DB::connection()->prepare(
-            'INSERT INTO Tarkeysaste (nimi, aste) 
-            VALUES (:nimi, :aste) RETURNING id');
+            'INSERT INTO Tarkeysaste (nimi, aste, kayttaja_id) 
+            VALUES (:nimi, :aste, :kayttaja_id) RETURNING id');
         
         $query->execute(array(
             'nimi' => $this->nimi,
-            'aste' => $this->aste
-            ));
+            'aste' => $this->aste,
+            'kayttaja_id' => BaseController::get_user_logged_in()->id
+        ));
     }
 
     public function destroy() {

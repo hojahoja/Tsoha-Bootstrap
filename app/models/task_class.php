@@ -30,6 +30,26 @@ class TaskClass extends BaseModel {
         return $classes;
     }
 
+    public static function find_by_user_id($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE kayttaja_id = :id');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+
+        $classes = array();
+
+        foreach ($rows as $row) {
+
+            $classes[] = new TaskClass(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'kayttaja_id' => $row['kayttaja_id']
+            ));
+
+        }
+
+        return $classes;
+    }
+
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -53,10 +73,11 @@ class TaskClass extends BaseModel {
 
     public function save() {
         $query = DB::connection()->prepare(
-            'INSERT INTO Luokka (nimi) 
-            VALUES (:nimi) RETURNING id');
+            'INSERT INTO Luokka (nimi, kayttaja_id) 
+            VALUES (:nimi, :kayttaja_id) RETURNING id');
         
-        $query->execute(array('nimi' => $this->nimi));
+        $query->execute(array('nimi' => $this->nimi, 'kayttaja_id' => BaseController::get_user_logged_in()->id));
+
     }
 
     public function destroy() {
