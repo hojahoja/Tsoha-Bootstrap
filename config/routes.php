@@ -12,6 +12,19 @@
     HelloWorldController::sandbox();
   });
 
+//////////////////////////////Plans//////////////////////////////
+  $routes->get('/plan/edit', function() {
+    HelloWorldController::edit_note();
+  });
+
+  $routes->get('/plan/list', function() {
+    HelloWorldController::listing_page();
+  });
+
+  $routes->get('/plan/show', function() {
+    HelloWorldController::note_information();
+  });
+
 //////////////////////////////Task//////////////////////////////
 
   $routes->get('/task', 'check_logged_in', function() {
@@ -106,5 +119,9 @@
   });
 
   $routes->get('/register', function() {
-    HelloWorldController::registration_page();
+    UserController::registration_page();
+  });
+
+  $routes->post('/register', function() {
+    UserController::handle_registration();
   });

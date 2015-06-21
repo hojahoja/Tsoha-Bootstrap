@@ -6,7 +6,7 @@ class BaseController{
     if (isset($_SESSION['user'])) {
       $user_id = $_SESSION['user'];
 
-      $user = user::find($user_id);
+      $user = User::find($user_id);
       return $user;
     }
 

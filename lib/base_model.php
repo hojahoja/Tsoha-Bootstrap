@@ -65,4 +65,22 @@
       return $errors;
     }
 
+    public function validate_username($nimi) {
+      $errors = array();
+      $user = User::find_by_name($nimi);
+      if (!is_null($user)) {
+        $errors[] = 'Käyttäjänimi on jo käytössä. Valitse uusi käyttäjänimi.';
+      }
+      return $errors;
+    }
+
+    public function validate_string_equality($string1, $string2, $attrName) {
+      $errors = array();
+      if ($string1 != $string2) {
+            $errors[] = $attrName . ' eivät täsmää';
+        }
+
+      return  $errors;
+    }
+
   }

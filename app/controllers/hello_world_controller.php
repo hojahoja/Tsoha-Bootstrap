@@ -29,12 +29,4 @@
     public static function edit_note() {
       View::make('plans/edit.html');
     }
-
-    public static function login_page() {
-      View::make('plans/login.html');
-    }
-
-    public static function registration_page() {
-      View::make('plans/register.html');
-    }
   }
