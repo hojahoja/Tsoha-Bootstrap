@@ -28,7 +28,7 @@
     }
 
     public function validate_string_length($string, $attrName, $min, $max) {
-    $errors = array();
+      $errors = array();
       if ($string == '' || $string == null) {
         $errors[] = $attrName . ' ei saa olla tyhjä';
       }
@@ -39,6 +39,27 @@
 
       if (strlen($string) > $max) {
         $errors[] = $attrName . ' saa olla enintään ' . $max . ' merkkiä pitkä';
+      }
+
+      return $errors;
+    }
+
+    public function validate_integer($integer, $attrName, $min, $max) {
+      $errors = array();
+      if (is_int($integer)) {
+        $errors[] = $attrName . ' pitää olla kokonaisluku';
+      }
+
+      if ($integer == null) {
+        $errors[] = $attrName . ' ei saa olla tyhjä';
+      }
+
+      if ($integer < $min) {
+        $errors[] = $attrName . ' pitää olla suurempi kuin ' . $min;
+      }
+
+      if ($integer > $max) {
+        $errors[] = $attrName . ' pitää olla pienempi kuin ' . $max;
       }
 
       return $errors;

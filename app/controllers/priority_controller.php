@@ -11,6 +11,11 @@ class PriorityController extends BaseController {
         View::make('priority/new.html');
     }
 
+    public static function edit($id) {
+        $priority = Priority::find($id);
+        View::make('priority/edit.html', array('attributes' => $priority));
+    }
+
     public static function store() {
         $params = $_POST;
         $attributes = array(
@@ -32,7 +37,7 @@ class PriorityController extends BaseController {
             Redirect::to('/priority', array('message' => 'Tärkeysaste lisätty'));
         } else {
             $priorities=Priority::all();
-            View::make('priority/index.html', array('errors' => $errors, 'attributes' => $attributes, 'priorities' => $priorities));
+            View::make('priority/new.html', array('errors' => $errors, 'attributes' => $attributes, 'priorities' => $priorities));
         }
 
     }
@@ -42,7 +47,8 @@ class PriorityController extends BaseController {
 
         $attributes = array(
             'id' => $id,
-            'nimi' => $params['nimi']
+            'nimi' => $params['nimi'],
+            'aste' => $params['aste']
             );
 
         $priority = new Priority($attributes);
@@ -58,7 +64,7 @@ class PriorityController extends BaseController {
             View::make('priority/edit.html', array('errors' => $errors, 'attributes' => $attributes));            
         } else {
             $priority->update();
-            Redirect::to('/priority/' . $priority->id, array('message' => 'Askare muokattu'));
+            Redirect::to('/priority', array('message' => 'Tärkeysaste muokattu'));
         }
     }
     

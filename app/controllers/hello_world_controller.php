@@ -4,7 +4,7 @@
 
     public static function index(){
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
-   	  View::make('plans/frontpage.html');
+   	  View::make('frontpage.html');
     }
 
     public static function sandbox(){

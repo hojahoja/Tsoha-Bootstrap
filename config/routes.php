@@ -52,10 +52,6 @@
     TaskClassController::store();
   });
 
-  $routes->post('/class/:id/destroy', 'check_logged_in', function($id) {
-    TaskClassController::destroy($id);
-  });
-
     $routes->get('/class/:id/edit', 'check_logged_in', function($id) {
     TaskClassController::edit($id);
   });
@@ -63,6 +59,11 @@
   $routes->post('/class/:id/edit', 'check_logged_in', function($id) {
     TaskClassController::update($id);
   });
+
+  $routes->post('/class/:id/destroy', 'check_logged_in', function($id) {
+    TaskClassController::destroy($id);
+  });
+
 
 //////////////////////////////Priority//////////////////////////////
 
@@ -78,12 +79,16 @@
     PriorityController::create();
   });
 
-  $routes->post('/priority/:id/destroy', 'check_logged_in', function($id) {
-    PriorityController::destroy($id);
+  $routes->get('/priority/:id/edit', 'check_logged_in', function($id) {
+    PriorityController::edit($id);
   });
 
   $routes->post('/priority/:id/edit', 'check_logged_in', function($id) {
     PriorityController::update($id);
+  });
+
+  $routes->post('/priority/:id/destroy', 'check_logged_in', function($id) {
+    PriorityController::destroy($id);
   });
 
 //////////////////////////////User//////////////////////////////
