@@ -83,4 +83,13 @@
       return  $errors;
     }
 
+    public function validate_not_null_object($object, $attrName) {
+      $errors = array();
+      if (is_null($object)) {
+        $errors[] = 'Sinun täytyy ensin luoda ' . $attrName;
+      }
+
+      return $errors;
+    }
+
   }

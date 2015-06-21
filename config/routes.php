@@ -43,6 +43,10 @@
     TaskController::show($id);
   });
 
+  $routes->post('/task/:id/done', 'check_logged_in', function($id) {
+    TaskController::done($id);
+  });
+
   $routes->get('/task/:id/edit', 'check_logged_in', function($id) {
     TaskController::edit($id);
   });

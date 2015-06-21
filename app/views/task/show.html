@@ -4,7 +4,12 @@
   <h1>{{task.nimi}}</h1>
   <ul>
     <li><strong>Lisäyspäivä:</strong> {{task.lisayspaiva}}</li>
-    <li><strong>Tärkeys:</strong> Ei tärkeä</li>
+    
+    {% for priority in priorities%}
+            {% if priority.id == task.tarkeysaste_id %}
+              <li><strong>Tärkeys:</strong> {{priority.nimi}}</li>
+            {% endif %}
+    {% endfor %}
     <li>
       <strong>Tila:</strong> 
       {% if task.tehty %}

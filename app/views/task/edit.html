@@ -21,19 +21,16 @@
   </div>
   <div> 
     <div class="form-group">
-    <label>Tärkeys(ei vielä implementoitu)</label>
-    <select class="form-control" name="tarkeys">
-      <option>ei tärkeä</option>
-      <option>tärkeä</option>
-      <option>erittäin tärkeä</option>
-    </select>
-  </div>
-  <div class="form-group">
+      <label>Tärkeysaste</label>
+      <select class="form-control" name="tarkeysaste_id">
+        {% for priority in priorities %}
+        <option value="{{priority.id}}">{{priority.nimi}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
     <label>Luokka(ei ole vielä implementoitu)</label>
-    <input type="text" class="form-control" value="Kotityöt">
-  </div>
-  <div type="text" class=" form-group">
-    
+    <input type="text" class="form-control" value="Kotityöt">    
   </div>
   <div class="form-group">
     <label>Kuvaus</label>

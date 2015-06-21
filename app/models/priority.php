@@ -60,14 +60,17 @@ class Priority extends BaseModel {
         $query->execute(array('id' => $id));
         $row = $query->fetch();
 
+        $priority = null;
         if ($row) {    
-            $class = new TaskClass(array(
+            $priority = new Priority(array(
                 'id' => $row['id'],
-                'nimi' => $row['nimi']
+                'nimi' => $row['nimi'],
+                'aste' => $row['aste'],
+                'kayttaja_id' => $row['kayttaja_id']
             ));
         }
 
-        return $class;
+        return $priority;
     }
 
     public function save() {

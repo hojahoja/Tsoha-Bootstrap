@@ -21,7 +21,7 @@ CREATE TABLE Askare(
     id SERIAL PRIMARY KEY,
     nimi varchar(255) NOT NULL,
     lisayspaiva DATE,
-    tehty boolean DEFAULT FALSE,
+    tehty boolean NOT NULL DEFAULT false,
     kuvaus varchar(255),
     kayttaja_id INTEGER REFERENCES Kayttaja(id) ON DELETE cascade ON UPDATE cascade,
     tarkeysaste_id INTEGER REFERENCES Tarkeysaste(id) ON DELETE SET NULL ON UPDATE cascade

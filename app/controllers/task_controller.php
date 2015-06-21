@@ -3,22 +3,36 @@
 class TaskController extends BaseController {
 
     public static function index() {
-        $tasks = task::find_by_user_id(BaseController::get_user_logged_in()->id);
-        View::make('task/index.html', array('tasks' => $tasks));
+        $userID = BaseController::get_user_logged_in()->id;
+        $tasks = task::find_by_user_id($userID);
+        $priorities = Priority::find_by_user_id($userID);
+        View::make('task/index.html', array('tasks' => $tasks, 'priorities' => $priorities));
     }
 
     public static function show($id) {
+        $userID = BaseController::get_user_logged_in()->id;
         $task = task::find($id);
-        View::make('task/show.html', array('task' => $task));
+        $priorities = Priority::find_by_user_id($userID);
+
+        View::make('task/show.html', array('task' => $task, 'priorities' => $priorities));
     }
 
     public static function create() {
-        View::make('task/new.html');
+        $classes = TaskClass::find_by_user_id(BaseController::get_user_logged_in()->id);
+        $priorities = Priority::find_by_user_id(BaseController::get_user_logged_in()->id);
+
+        $priorities = array_filter($priorities);
+        if (empty($priorities)) {
+            View::make('priority/new.html');
+        } else {
+            View::make('task/new.html', array('classes' => $classes, 'priorities' => $priorities));
+        }      
     }
 
     public static function edit($id) {
         $task = task::find($id);
-        View::make('task/edit.html', array('attributes' => $task));
+        $priorities = Priority::find_by_user_id(BaseController::get_user_logged_in()->id);
+        View::make('task/edit.html', array('attributes' => $task, 'priorities' => $priorities));
     }    
 
     public static function store() {
@@ -26,7 +40,8 @@ class TaskController extends BaseController {
         $attributes = array(
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
-            'lisayspaiva' => date("Y-m-d H:i:s")
+            'lisayspaiva' => date("Y-m-d H:i:s"),
+            'tarkeysaste_id' =>$params['tarkeysaste_id']
         );
 
         $task = new task($attributes);
@@ -54,6 +69,7 @@ class TaskController extends BaseController {
             'id' => $id,
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
+            'tarkeysaste_id' => $params['tarkeysaste_id']
         );
 
         $task = new task($attributes);
@@ -65,12 +81,21 @@ class TaskController extends BaseController {
             }
         }
 
-        if ($errorcount > 0) {            
-            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));            
+        if ($errorcount > 0) {      
+            $priorities = Priority::find_by_user_id(BaseController::get_user_logged_in()->id);      
+            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'priorities' => $priorities));            
         } else {
             $task->update();
             Redirect::to('/task/' . $task->id, array('message' => 'Askare muokattu'));
         }
+    }
+
+    public static function done($id) {
+        $task = new task(array('id' => $id));
+
+        $task->done();
+
+        Redirect::to('/task');
     }
 
     public static function destroy($id) {
